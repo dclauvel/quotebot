@@ -16,10 +16,10 @@ api = tweepy.API(auth)
 filename=open(tweets,'r')
 f=filename.readlines()
 filename.close()
- 
+
 for tweet in f:
-	try:
-    	api.update_status(tweet)
-    	time.sleep(900)
+    try:
+        api.update_status(tweet)
+        time.sleep(900)
     except tweepy.TweepError:
-    	pass
+        pass
