@@ -18,5 +18,8 @@ f=filename.readlines()
 filename.close()
  
 for tweet in f:
-    api.update_status(tweet)
-    time.sleep(900)
+	try:
+    	api.update_status(tweet)
+    	time.sleep(900)
+    except tweepy.TweepError:
+    	pass
