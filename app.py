@@ -1,24 +1,36 @@
 #!/usr/bin/env python
  
-import tweepy, time, sys, os
+import tweepy, time, sys, os, logging, json
  
-tweets = 'tweets.txt'
+logger = logging.getLogger('stickybot')
+logger.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+logger.addHandler(ch)
+
+
+tweets = 'steinbeck.txt'
 
 CONSUMER_KEY = os.environ["CONSUMER_KEY"]
 CONSUMER_SECRET = os.environ["CONSUMER_SECRET"]
 ACCESS_KEY = os.environ["ACCESS_KEY"]
 ACCESS_SECRET = os.environ["ACCESS_SECRET"]
 
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-api = tweepy.API(auth)
- 
+try:
+    auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+    auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+    api = tweepy.API(auth)
+    logger.debug("Successfull auth")
+except tweepy.TweepError as e:
+    logger.debug("Failed to auth " + e. )
+
 filename=open(tweets,'r')
 f=filename.readlines()
 filename.close()
 
-for tweet in f:
+for l in f:
     try:
+        j = json.load(l)
+        tweet = j['field1'][0]
         api.update_status(tweet)
         time.sleep(900)
     except tweepy.TweepError:
