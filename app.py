@@ -21,7 +21,7 @@ try:
     api = tweepy.API(auth)
     logger.debug("Successfull auth")
 except tweepy.TweepError as e:
-    logger.debug("Failed to auth " + e. )
+    logger.debug("Failed to auth " + e.response.text)
 
 filename=open(tweets,'r')
 f=filename.readlines()
