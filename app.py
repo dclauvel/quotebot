@@ -5,6 +5,8 @@ import tweepy, time, sys, os, logging, json
 logger = logging.getLogger('stickybot')
 logger.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
