@@ -40,7 +40,7 @@ for l in f:
         tweet = j['field1'][0]
         api.update_status(tweet)
         logger.debug("Tweeted " + tweet)
-        logger.debug("Sleeping for " + SLEEPING)
+        logger.debug("Sleeping for " + str(SLEEPING)
         time.sleep(SLEEPING)
         logger.debug("Finished sleeping")
     except tweepy.TweepError as e:
