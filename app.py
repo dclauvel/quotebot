@@ -29,7 +29,7 @@ filename.close()
 
 for l in f:
     try:
-        j = json.load(l)
+        j = json.loads(l)
         tweet = j['field1'][0]
         api.update_status(tweet)
         logger.debug("Tweeted " + tweet)
