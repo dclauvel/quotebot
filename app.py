@@ -30,7 +30,7 @@ try:
     filename=open(tweets,'r')
     f=filename.readlines()
     filename.close()
-except IOError, OSError:
+except (IOError, OSError):
     logger.debug("Error with file " + TWEETS)
 
 
