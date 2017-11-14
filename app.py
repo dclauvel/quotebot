@@ -27,7 +27,7 @@ except tweepy.TweepError as e:
     logger.debug("Failed to auth " + e.response.text)
 
 try:
-    filename=open(tweets,'r')
+    filename=open(TWEETS,'r')
     f=filename.readlines()
     filename.close()
 except (IOError, OSError):
