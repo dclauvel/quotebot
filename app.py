@@ -9,7 +9,7 @@ logger.addHandler(ch)
 
 
 TWEETS = os.environ["TWEETS"]
-SLEEPING = os.environ["SLEEPING"]
+SLEEPING = int(os.environ["SLEEPING"])
 
 CONSUMER_KEY = os.environ["CONSUMER_KEY"]
 CONSUMER_SECRET = os.environ["CONSUMER_SECRET"]
