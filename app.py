@@ -8,12 +8,15 @@ ch = logging.StreamHandler()
 logger.addHandler(ch)
 
 
-tweets = 'steinbeck.txt'
+TWEETS = os.environ["TWEETS"]
+SLEEPING = os.environ["SLEEPING"]
 
 CONSUMER_KEY = os.environ["CONSUMER_KEY"]
 CONSUMER_SECRET = os.environ["CONSUMER_SECRET"]
 ACCESS_KEY = os.environ["ACCESS_KEY"]
 ACCESS_SECRET = os.environ["ACCESS_SECRET"]
+
+
 
 try:
     auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -23,9 +26,13 @@ try:
 except tweepy.TweepError as e:
     logger.debug("Failed to auth " + e.response.text)
 
-filename=open(tweets,'r')
-f=filename.readlines()
-filename.close()
+try:
+    filename=open(tweets,'r')
+    f=filename.readlines()
+    filename.close()
+except IOError, OSError:
+    logger.debug("Error with file " + TWEETS)
+
 
 for l in f:
     try:
@@ -33,7 +40,8 @@ for l in f:
         tweet = j['field1'][0]
         api.update_status(tweet)
         logger.debug("Tweeted " + tweet)
-        time.sleep(900)
+        time.sleep(SLEEPING)
         logger.debug("Finished sleeping")
-    except tweepy.TweepError:
+    except tweepy.TweepError as e:
+        logger.debug("Teweepy Error " + e.response.text)
         pass
