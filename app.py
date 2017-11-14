@@ -32,6 +32,8 @@ for l in f:
         j = json.load(l)
         tweet = j['field1'][0]
         api.update_status(tweet)
+        logger.debug("Tweeted " + tweet)
         time.sleep(900)
+        logger.debug("Finished sleeping")
     except tweepy.TweepError:
         pass
